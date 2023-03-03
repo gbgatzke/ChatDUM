@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: ChatDUM_production
-  username: ChatDUM
-  password: <%= ENV["CHATDUM_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
