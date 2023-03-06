@@ -1,25 +1,49 @@
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar'
+import { Routes, Route } from 'react-router'
+import Login from './components/Login'
+import { useState, useEffect } from 'react'
+import Home from './components/Home'
+
+import NewUserForm from './components/NewUserForm'
+
+
 
 function App() {
+
+  const [ currentUser, setCurrentUser ] = useState('')
+
+  useEffect(() => {
+    fetch('/me')
+    .then(r => {
+      if (r.ok) {
+        r.json().then(user => setCurrentUser(user))
+      }
+    })
+    },[])
+
+    if(!currentUser) return (
+      <div>
+        <NavBar />
+        <Login setCurrentUser={setCurrentUser}/>
+      </div>
+    )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <NavBar />
+      <Routes>
+        <Route path="/home" element={<Home />}/>
+    
+        <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
+
+        <Route path='/login' element={<Login />}/>
+      </Routes>
+    
+    </>
+
+  )
 }
 
 export default App;
