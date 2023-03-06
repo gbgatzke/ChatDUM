@@ -34,7 +34,6 @@ function Login({setCurrentUser}) {
             }
         })
         navigate('/home')
-        
     }
 
     return (
