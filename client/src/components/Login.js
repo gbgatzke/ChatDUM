@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login({setCurrentUser}) {
+
+    const navigate = useNavigate()
 
     const initValues = {
         username: "",
@@ -12,11 +16,30 @@ function Login() {
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({...formData, [name]: value})
-      }
+    }
+
+    function handleSubmit(e){
+        e.preventDefault()
+
+        fetch('/login', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData)
+        })
+        .then(r => {
+            if(r.ok){
+                r.json().then((user) => {
+                    setCurrentUser(user)
+                })
+            }
+        })
+        navigate('/home')
+        
+    }
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form_input">
                     <input
                         type="text"
@@ -24,7 +47,7 @@ function Login() {
                         name="username"
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder="Name"
+                        placeholder="username"
                     />
                 </div>
                 <div className="form_input">
@@ -37,8 +60,11 @@ function Login() {
                         placeholder="Password"
                     />
                 </div>
+                <button>CLICK</button>
             </form>
+            
         </div>
+        
     )
 }
 

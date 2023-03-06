@@ -1,6 +1,9 @@
  import{ NavLink } from 'react-router-dom'
 
-function NavBar() {
+function NavBar({handleLogout}) {
+
+    
+
     return (
         <div>
             <NavLink to="/login">
@@ -9,8 +12,8 @@ function NavBar() {
             <NavLink to="/userform">
                 <button>New User</button>
             </NavLink>
-            <NavLink to='/login'>
-                <button>Logout</button>
+            <NavLink to='/home'>
+                <button onClick={handleLogout}>Logout</button>
             </NavLink>
         </div>
     )

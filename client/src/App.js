@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router'
 import Login from './components/Login'
 import { useState, useEffect } from 'react'
 import Home from './components/Home'
+import { useNavigate } from 'react-router';
 
 import NewUserForm from './components/NewUserForm'
 
@@ -12,7 +13,8 @@ import NewUserForm from './components/NewUserForm'
 
 function App() {
 
-  const [ currentUser, setCurrentUser ] = useState('')
+  const [ currentUser, setCurrentUser ] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch('/me')
@@ -23,22 +25,32 @@ function App() {
     })
     },[])
 
-    if(!currentUser) return (
-      <div>
-        <NavBar />
-        <Login setCurrentUser={setCurrentUser}/>
-      </div>
-    )
+    // if(!currentUser) return (
+    //   <div>
+    //     <NavBar />
+    //     <Login setCurrentUser={setCurrentUser}/>
+        
+    //   </div>
+    // )
+
+    function handleLogout() {
+      fetch('/logout', {
+        method: 'DELETE'
+      })
+      
+      setCurrentUser(null)
+      
+    }
 
   return (
     <>
-      <NavBar />
+      <NavBar handleLogout={handleLogout}/>
       <Routes>
-        <Route path="/home" element={<Home />}/>
+        <Route path="/home" element={<Home currentUser={currentUser}/>}/>
     
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
 
-        <Route path='/login' element={<Login />}/>
+        <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
       </Routes>
     
     </>
