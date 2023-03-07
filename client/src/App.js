@@ -8,6 +8,8 @@ import Home from './components/Home'
 import { useNavigate } from 'react-router';
 
 import NewUserForm from './components/NewUserForm'
+import RenderChatRoom from './components/RenderChatRoom';
+
 
 
 
@@ -51,6 +53,7 @@ function App() {
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
 
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
+        <Route path='/chatroom/:id' element={<RenderChatRoom />}/>
       </Routes>
     
     </>
