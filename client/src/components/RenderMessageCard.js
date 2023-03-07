@@ -1,7 +1,9 @@
 function RenderMessageCard({message}) {
     return(
-        <div>
-            <h5>{message.content}</h5>
+        <div className="message-card">
+            <h6>{message.user.username} ... {message.created_at}</h6>
+            <p>{message.content}</p>
+            
         </div>
     )
 }

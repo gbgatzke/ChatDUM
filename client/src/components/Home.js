@@ -1,10 +1,9 @@
-  import { useEffect } from 'react'
+  import { joinPaths } from '@remix-run/router'
+import { useEffect } from 'react'
   
   function Home({currentUser}) {
 
-    useEffect(() => {
-        fetch('/me')
-    })
+    
     if(!currentUser){
       return(<h3>Please log in to see your messages!</h3>)
     }

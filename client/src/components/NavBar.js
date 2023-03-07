@@ -15,6 +15,12 @@ function NavBar({handleLogout}) {
             <NavLink to='/home'>
                 <button onClick={handleLogout}>Logout</button>
             </NavLink>
+            <NavLink to='/home'>
+                <button>Home</button>
+            </NavLink>
+            <NavLink to='/chatroom/:id'>
+                <button>chatroom</button>
+            </NavLink>
         </div>
     )
 }

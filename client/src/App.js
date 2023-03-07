@@ -43,7 +43,7 @@ function App() {
       setCurrentUser(null)
       
     }
-
+    console.log(currentUser)
   return (
     <>
       <NavBar handleLogout={handleLogout}/>
@@ -53,7 +53,7 @@ function App() {
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
 
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
-        <Route path='/chatroom/:id' element={<RenderChatRoom />}/>
+        <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser}/>}/>
       </Routes>
     
     </>
