@@ -7,10 +7,14 @@ skip_before_action :authorize, only: :create
     render json: @users
   end
 
-
   def show
     user = User.find_by(id: session[:user_id])
     render json: user, serializer: UsersWithChatroomsSerializer, status: :ok
+  end
+
+  def profile
+    user = User.find(params[:id])
+    render json: user
   end
 
   def create
