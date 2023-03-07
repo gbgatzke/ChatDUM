@@ -6,16 +6,13 @@
         fetch('/me')
     })
     if(!currentUser){
-      return(<>
-      <h3>Please log in or sign up to see your messages</h3>
-      </>)
+      return(<h3>Please log in to see your messages!</h3>)
     }
     return (
         <div>
             <h1>Home Page</h1>
-            
+
         </div>
-        
     )
   }
 
