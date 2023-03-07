@@ -4,7 +4,7 @@ function ChatList({ currentUser }) {
 
 
     return (
-
+        <div></div>
     )
 }
 
