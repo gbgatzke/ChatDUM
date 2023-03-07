@@ -1,11 +1,12 @@
 import { joinPaths } from "@remix-run/router"
 import { useEffect, useState } from "react"
+import { redirect } from "react-router-dom"
 
 import RenderMessageCard from "./RenderMessageCard"
 
 
 function RenderChatRoom({currentUser}){
-
+    
     const chatroom = {
         id: 24,
         room_name: "test room"
@@ -14,6 +15,7 @@ function RenderChatRoom({currentUser}){
     //state variables/
     //////////////////
     const [messages, setMessages] = useState([])
+    
 
     //////////////////
     // initial fetch /
@@ -21,17 +23,25 @@ function RenderChatRoom({currentUser}){
 
     useEffect(() => {
         fetch(`/chatroom/${chatroom.id}/messages`)
-        .then(r => r.json())
         .then(r => {
-            setMessages(r)
-            console.log(r)}
-            )
+        if (r.ok){
+            r.json().then(mess => {
+                
+                setMessages(mess)
+            }    )
+        }else{
+            return redirect("/home");
+        }})
         },[])
+
     
     ////////////////////////////////
     // creating message render card
     ////////////////////////////////
+
+
     const messageList = messages.map((message) => {
+        console.log(message)
         return <RenderMessageCard message={message} key={message.id} />
     })
 
@@ -67,9 +77,12 @@ function RenderChatRoom({currentUser}){
     //// render page ////////////////
     /////////////////////////////////
 
-    if(!messages){
-        return(<h1>Loading!!!</h1>)
-    }
+    if(messages === []){
+        console.log(messages)
+        return(
+            <h1>Loading!!!</h1>
+            )
+    }else{
     return(
         <>
         <h1>{chatroom.room_name}</h1>
@@ -80,7 +93,7 @@ function RenderChatRoom({currentUser}){
             <button>SEND</button>
         </form>
         </>
-    )
+    )}
 }
 
 export default RenderChatRoom

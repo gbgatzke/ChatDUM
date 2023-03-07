@@ -1,4 +1,4 @@
-  import { joinPaths } from '@remix-run/router'
+import { joinPaths } from '@remix-run/router'
 import { useEffect } from 'react'
   
   function Home({currentUser}) {

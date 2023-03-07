@@ -27,13 +27,6 @@ function App() {
     })
     },[])
 
-    // if(!currentUser) return (
-    //   <div>
-    //     <NavBar />
-    //     <Login setCurrentUser={setCurrentUser}/>
-        
-    //   </div>
-    // )
 
     function handleLogout() {
       fetch('/logout', {
