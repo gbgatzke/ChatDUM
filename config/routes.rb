@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :bios, only: [:show]
-  resources :messages, only: [:show, :create]
+  resources :messages, only: [:show, :create, :destroy]
   resources :chatrooms, only: [:index, :show]
   mount ActionCable.server => "/cable"
   resources :users, only: [:index, :show, :create, :destroy]

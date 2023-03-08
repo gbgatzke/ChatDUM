@@ -42,9 +42,20 @@ function RenderChatRoom({currentUser}){
 
     const messageList = messages.map((message) => {
         console.log(message)
-        return <RenderMessageCard message={message} key={message.id} />
+        return <RenderMessageCard message={message} key={message.id} currentUser={currentUser} handleDelete={handleDelete} />
     })
 
+    ////////////////////////////////
+    // handle delete message ///////
+    ////////////////////////////////
+
+    function handleDelete(id){
+        
+        fetch(`/messages/${id}`, {
+            method: 'DELETE'
+        })
+        
+    }
     ////////////////////////////////
     // handle new message //////////
     ////////////////////////////////
