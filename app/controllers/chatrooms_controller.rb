@@ -1,5 +1,4 @@
 class ChatroomsController < ApplicationController
-  before_action :set_chatroom, only: %i[ show update destroy ]
 
   # GET /chatrooms
   def index

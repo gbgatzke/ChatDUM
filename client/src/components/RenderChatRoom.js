@@ -27,7 +27,7 @@ function RenderChatRoom({currentUser}){
             console.log(r)}
             )
         },[])
-    
+
     ////////////////////////////////
     // creating message render card
     ////////////////////////////////

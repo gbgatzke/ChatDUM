@@ -18,7 +18,7 @@ function App() {
 
   const [ currentUser, setCurrentUser ] = useState(null)
   const navigate = useNavigate()
-
+  // console.log(currentUser)
   useEffect(() => {
     fetch('/me')
     .then(r => {
@@ -27,6 +27,8 @@ function App() {
       }
     })
     },[])
+
+    console.log(currentUser)
 
     // if(!currentUser) return (
     //   <div>
