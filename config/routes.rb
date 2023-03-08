@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :chatrooms, only: [:index, :show]
   resources :users
 
-  get '/users/:id', to: 'users#profile'
+  get '/userprofile/:id', to: 'users#profile'
 
   get '/me', to: 'users#show'
   post "/signup", to: "users#create"

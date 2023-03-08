@@ -26,16 +26,11 @@ function RenderChatRoom({ currentUser }){
 
 
     const messageList = messages.map((message) => {
-        
         return <RenderMessageCard message={message} key={message.id} currentUser={currentUser} handleDelete={handleDelete} />
     })
 
-    ////////////////////////////////
-    // handle delete message ///////
-    ////////////////////////////////
-
     function handleDelete(id){
-        
+
         fetch(`/messages/${id}`, {
             method: 'DELETE'
         })
@@ -45,18 +40,15 @@ function RenderChatRoom({ currentUser }){
         })
         setMessages(filteredMessages)
     }
-    ////////////////////////////////
-    // handle delete message ///////
-    ////////////////////////////////
 
     function handleSubmit(e) {
         e.preventDefault()
         const messageNew = {
             content: e.target.newMessage.value,
             user_id: currentUser.id,
-            chatroom_id: id,
+            chatroom_id: id
         }
-        
+
         fetch(`/messages`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -67,8 +59,7 @@ function RenderChatRoom({ currentUser }){
                 r.json().then(mess => setMessages([...messages, mess]))
             }
             })
-            
-        
+
         e.target.reset()
     }
 
