@@ -83,9 +83,10 @@ function RenderChatRoom({ currentUser }){
             <h1>Loading!!!</h1>
             )
     }else{
+        
     return(
         <>
-        {/* <h1>{chatroom.room_name}</h1> */}
+        <h1>{messages[0].chatroom.room_name}</h1>
         {messageList}
         <form onSubmit={handleSubmit} >
             <label>Enter Message</label>
