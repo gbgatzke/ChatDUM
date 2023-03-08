@@ -1,5 +1,4 @@
 class BiosController < ApplicationController
-  before_action :set_bio, only: %i[ show update destroy ]
 
   # GET /bios
   def index

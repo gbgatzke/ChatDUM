@@ -1,8 +1,8 @@
 class User < ApplicationRecord
     has_secure_password
-    has_many :messages
+    has_many :messages, dependent: :destroy
     has_many :chatrooms, through: :messages
-    has_one :bio
+    has_one :bio, dependent: :destroy
 
     validates :name, presence: true
     validates :username, presence: true
