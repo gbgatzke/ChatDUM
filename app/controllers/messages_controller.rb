@@ -34,7 +34,9 @@ class MessagesController < ApplicationController
 
   # DELETE /messages/1
   def destroy
+    message = Message.find(params[:id])
     message.destroy
+    
   end
 
   private

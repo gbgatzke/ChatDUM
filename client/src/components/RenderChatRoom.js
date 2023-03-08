@@ -18,47 +18,67 @@ function RenderChatRoom({ currentUser }){
             )
         },[])
 
+    
+
     ////////////////////////////////
     // creating message render card
     ////////////////////////////////
+
+
     const messageList = messages.map((message) => {
-        return <RenderMessageCard message={message} key={message.id} />
+        console.log(message)
+        return <RenderMessageCard message={message} key={message.id} currentUser={currentUser} handleDelete={handleDelete} />
     })
 
     ////////////////////////////////
-    // handle new message //////////
+    // handle delete message ///////
     ////////////////////////////////
 
-    // function handleSubmit(e) {
-    //     e.preventDefault()
-    //     const messageNew = {
-    //         content: e.target.newMessage.value,
-    //         user_id: currentUser.id,
-    //         chatroom_id: chatroom.id,
-    //     }
-    //     console.log(messageNew)
+    function handleDelete(id){
+        
+        fetch(`/messages/${id}`, {
+            method: 'DELETE'
+        })
+        
+    }
+    ////////////////////////////////
+    // handle delete message ///////
+    ////////////////////////////////
 
-    //     fetch(`/messages`, {
-    //         method: "POST",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify(messageNew)
-    //     })
-    //     .then(r => {
-    //         if (r.ok) {
-    //             r.json().then(mess => setMessages([...messages, mess]))
-    //         }
-    //         })
-    //     e.target.reset()
-    // }
+    function handleSubmit(e) {
+        e.preventDefault()
+        const messageNew = {
+            content: e.target.newMessage.value,
+            user_id: currentUser.id,
+            chatroom_id: chatroom.id,
+        }
+        console.log(messageNew)
+
+        fetch(`/messages`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(messageNew)
+        })
+        .then(r => {
+            if (r.ok) {
+                r.json().then(mess => setMessages([...messages, mess]))
+            }
+            })
+            
+        e.target.reset()
+    }
 
 
     /////////////////////////////////
     //// render page ////////////////
     /////////////////////////////////
 
-    if(!messages){
-        return(<h1>Loading!!!</h1>)
-    }
+    if(messages === []){
+        console.log(messages)
+        return(
+            <h1>Loading!!!</h1>
+            )
+    }else{
     return(
         <>
         {/* <h1>{chatroom.room_name}</h1> */}
@@ -69,7 +89,7 @@ function RenderChatRoom({ currentUser }){
             <button>SEND</button>
         </form>
         </>
-    )
+    )}
 }
 
 export default RenderChatRoom
