@@ -1,37 +1,21 @@
-import { joinPaths } from "@remix-run/router"
 import { useEffect, useState } from "react"
-import { redirect } from "react-router-dom"
+import { useParams } from 'react-router-dom'
 
 import RenderMessageCard from "./RenderMessageCard"
 
 
-function RenderChatRoom({currentUser}){
-    
-    const chatroom = {
-        id: 24,
-        room_name: "test room"
-    }
-    //////////////////
-    //state variables/
-    //////////////////
-    const [messages, setMessages] = useState([])
-    
+function RenderChatRoom({ currentUser }){
 
-    //////////////////
-    // initial fetch /
-    //////////////////
+    const [messages, setMessages] = useState([])
+
+    const { id } = useParams()
 
     useEffect(() => {
-        fetch(`/chatroom/${chatroom.id}/messages`)
-        .then(r => {
-        if (r.ok){
-            r.json().then(mess => {
-                
-                setMessages(mess)
-            }    )
-        }else{
-            return redirect("/home");
-        }})
+        fetch(`/chatroom/${id}/messages`)
+        .then(r => r.json())
+        .then(r => 
+            setMessages(r)
+            )
         },[])
 
     
@@ -58,7 +42,7 @@ function RenderChatRoom({currentUser}){
         
     }
     ////////////////////////////////
-    // handle new message //////////
+    // handle delete message ///////
     ////////////////////////////////
 
     function handleSubmit(e) {
@@ -97,9 +81,9 @@ function RenderChatRoom({currentUser}){
     }else{
     return(
         <>
-        <h1>{chatroom.room_name}</h1>
+        {/* <h1>{chatroom.room_name}</h1> */}
         {messageList}
-        <form onSubmit={handleSubmit}>
+        <form >
             <label>Enter Message</label>
             <input type="text" name="newMessage" id="newMessage" />
             <button>SEND</button>
