@@ -18,7 +18,7 @@ function App() {
 
   const [ currentUser, setCurrentUser ] = useState(null)
   const navigate = useNavigate()
-  // console.log(currentUser)
+ 
   useEffect(() => {
     fetch('/me')
     .then(r => {
@@ -42,7 +42,7 @@ function App() {
         <Route path="/home" element={<Home currentUser={currentUser}/>}/>
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
-        <Route path='/chatroom/:id' element={<RenderChatRoom />}/>
+        <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser} />}/>
         <Route path="/profile/:id" element={<UserProfile />}/>
       </Routes>
     

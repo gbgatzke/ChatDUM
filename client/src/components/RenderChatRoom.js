@@ -26,7 +26,7 @@ function RenderChatRoom({ currentUser }){
 
 
     const messageList = messages.map((message) => {
-        console.log(message)
+        
         return <RenderMessageCard message={message} key={message.id} currentUser={currentUser} handleDelete={handleDelete} />
     })
 
@@ -40,6 +40,10 @@ function RenderChatRoom({ currentUser }){
             method: 'DELETE'
         })
         
+        const filteredMessages = messages.filter((mess) => {
+            return mess.id !== id
+        })
+        setMessages(filteredMessages)
     }
     ////////////////////////////////
     // handle delete message ///////
@@ -50,10 +54,9 @@ function RenderChatRoom({ currentUser }){
         const messageNew = {
             content: e.target.newMessage.value,
             user_id: currentUser.id,
-            chatroom_id: chatroom.id,
+            chatroom_id: id,
         }
-        console.log(messageNew)
-
+        
         fetch(`/messages`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -65,6 +68,7 @@ function RenderChatRoom({ currentUser }){
             }
             })
             
+        
         e.target.reset()
     }
 
@@ -74,7 +78,7 @@ function RenderChatRoom({ currentUser }){
     /////////////////////////////////
 
     if(messages === []){
-        console.log(messages)
+        
         return(
             <h1>Loading!!!</h1>
             )
@@ -83,7 +87,7 @@ function RenderChatRoom({ currentUser }){
         <>
         {/* <h1>{chatroom.room_name}</h1> */}
         {messageList}
-        <form >
+        <form onSubmit={handleSubmit} >
             <label>Enter Message</label>
             <input type="text" name="newMessage" id="newMessage" />
             <button>SEND</button>
