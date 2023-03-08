@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 
 import NewUserForm from './components/NewUserForm'
 import RenderChatRoom from './components/RenderChatRoom';
+import UserProfile from './components/UserProfile'
 
 
 
@@ -31,7 +32,6 @@ function App() {
     //   <div>
     //     <NavBar />
     //     <Login setCurrentUser={setCurrentUser}/>
-        
     //   </div>
     // )
 
@@ -39,21 +39,18 @@ function App() {
       fetch('/logout', {
         method: 'DELETE'
       })
-      
       setCurrentUser(null)
-      
     }
-    console.log(currentUser)
+
   return (
     <>
       <NavBar handleLogout={handleLogout}/>
       <Routes>
         <Route path="/home" element={<Home currentUser={currentUser}/>}/>
-    
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
-
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
-        <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser}/>}/>
+        <Route path='/chatroom/:id' element={<RenderChatRoom />}/>
+        <Route path="/profile/:id" element={<UserProfile />}/>
       </Routes>
     
     </>
