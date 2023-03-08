@@ -1,11 +1,7 @@
 import { useState } from "react"
 
 function RenderMessageCard({message, currentUser, handleDelete}) {
-    console.log(message)
     
-    function deleteButton(){
-        
-    }
 
     return(
         <div className="message-card">
