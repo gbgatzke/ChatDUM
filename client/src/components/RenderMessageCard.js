@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 function RenderMessageCard({message, currentUser, handleDelete}) {
-    
+    console.log(currentUser)
 
     return(
         <div className="message-card">
@@ -10,7 +10,6 @@ function RenderMessageCard({message, currentUser, handleDelete}) {
             <p>{message.content}</p>
             {currentUser.id === message.user.id ? <button onClick={() => handleDelete(message.id) } >Delete</button> : null }
             {currentUser.id === message.user.id ? <button>edit</button> : null}
-            
         </div>
     )
 }

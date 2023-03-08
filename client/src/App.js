@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router';
 import NewUserForm from './components/NewUserForm'
 import RenderChatRoom from './components/RenderChatRoom';
 import UserProfile from './components/UserProfile'
+import EditUserProfile from './components/EditUserProfile';
 
 
 
@@ -37,13 +38,14 @@ function App() {
 
   return (
     <>
-      <NavBar handleLogout={handleLogout}/>
+      <NavBar handleLogout={handleLogout} currentUser={currentUser}/>
       <Routes>
         <Route path="/home" element={<Home currentUser={currentUser}/>}/>
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
-        <Route path='/chatroom/:id' element={<RenderChatRoom />}/>
+        <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser}/>}/>
         <Route path="/profile/:id" element={<UserProfile />}/>
+        <Route path="/editprofile/:id" element={<EditUserProfile />}/>
       </Routes>
     
     </>

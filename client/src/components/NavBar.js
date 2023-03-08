@@ -1,10 +1,8 @@
  import{ NavLink } from 'react-router-dom'
 
-function NavBar({handleLogout}) {
+function NavBar({handleLogout, currentUser }) {
 
-    
-
-    return (
+    if(!currentUser) {return (
         <div>
             <NavLink to="/login">
                 <button>Login</button>
@@ -13,16 +11,24 @@ function NavBar({handleLogout}) {
                 <button>New User</button>
             </NavLink>
             <NavLink to='/home'>
-                <button onClick={handleLogout}>Logout</button>
-            </NavLink>
-            <NavLink to='/home'>
                 <button>Home</button>
             </NavLink>
-            <NavLink to='/chatroom/:id'>
-                <button>chatroom</button>
-            </NavLink>
         </div>
-    )
+    )}else{
+        return (
+            <div>
+                <NavLink to='/home'>
+                    <button onClick={handleLogout}>Logout</button>
+                </NavLink>
+                <NavLink to='/chatroom/:id'>
+                    <button>chatroom</button>
+                </NavLink>
+                <NavLink to='/home'>
+                    <button>Home</button>
+                </NavLink>
+            </div>
+        )
+    }
 }
 
 export default NavBar
