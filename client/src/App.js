@@ -28,15 +28,6 @@ function App() {
     })
     },[])
 
-    console.log(currentUser)
-
-    // if(!currentUser) return (
-    //   <div>
-    //     <NavBar />
-    //     <Login setCurrentUser={setCurrentUser}/>
-    //   </div>
-    // )
-
     function handleLogout() {
       fetch('/logout', {
         method: 'DELETE'
