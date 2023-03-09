@@ -15,7 +15,7 @@ function RenderChatRoom({ currentUser, cableApp }){
     const { id } = useParams()
 
     function updateApp(updatedRoom) {
-        console.log(updatedRoom)
+        console.log(updatedRoom.messages)
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ function RenderChatRoom({ currentUser, cableApp }){
             user_id: currentUser.id,
             chatroom_id: id
         }
-
+        console.log(messageNew)
         fetch(`/messages`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -61,7 +61,10 @@ function RenderChatRoom({ currentUser, cableApp }){
         })
         .then(r => {
             if (r.ok) {
-                r.json().then(mess => setMessages([...messages, mess]))
+                r.json().then((mess) => {
+                    setMessages([...messages, mess])
+                    console.log(mess)
+                })
             }
             })
 
@@ -71,7 +74,7 @@ function RenderChatRoom({ currentUser, cableApp }){
     function getRoomData(id) {
         fetch(`/chatrooms/${id}`)
         .then(r => r.json())
-        .then(r => setCurrentRoom(r))
+        .then(r => console.log(r))
     }
 
 
@@ -80,7 +83,6 @@ function RenderChatRoom({ currentUser, cableApp }){
     /////////////////////////////////
 
     if(messages === []){
-        
         return(
             <h1>Loading!!!</h1>
             )

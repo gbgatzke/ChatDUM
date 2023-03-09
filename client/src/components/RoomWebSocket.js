@@ -1,22 +1,27 @@
 import { useEffect } from 'react'
-
-function RoomWebSocket({ cableApp, updateApp, getRoomData }) {
+// cableApp, updateApp, getRoomData
+function RoomWebSocket(props) {
 
     useEffect(() => {
-        getRoomData(window.location.href.match(/\d+$/)[0])
-        cableApp.cable.subscriptions.create(
+        props.getRoomData(window.location.href.match(/\d+$/)[0])
+
+
+
+        props.cableApp.room = props.cableApp.cable.subscriptions.create(
             {
                 channel: "ChatroomsChannel",
                 room: window.location.href.match(/\d+$/)[0]
             },
             {
-                received(updatedRoom) {
+                received: (updatedRoom) => {
                     console.log(updatedRoom)
-                    // updateApp(updatedRoom)
+                    props.updateApp(updatedRoom)
                 },
             }
         )
+        console.log(props.cableApp.room)
         },[])
+        
     return <div></div>
 }
 

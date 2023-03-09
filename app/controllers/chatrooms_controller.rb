@@ -3,7 +3,6 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms
   def index
     chatrooms = Chatroom.all
-
     render json: chatrooms
   end
 

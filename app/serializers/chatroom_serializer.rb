@@ -1,5 +1,10 @@
 class ChatroomSerializer < ActiveModel::Serializer
-  attributes :id, :room_name
+  # include FastJsonapi::ObjectSerializer
+  attributes :id, :room_name, :users
   has_many :messages
-  has_many :users
+  # has_many :users
+
+  def users
+    self.users.uniq
+  end
 end

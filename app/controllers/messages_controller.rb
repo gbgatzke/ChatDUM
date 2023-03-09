@@ -3,20 +3,21 @@ class MessagesController < ApplicationController
   # GET /messages
   def index
     messages = Message.all
-
     render json: messages
   end
 
   # GET /messages/1
-  def show
-    render json: message
-  end
+  # def show
+  #   render json: message
+  # end
 
   # POST /messages
   def create
-    message = Message.create(message_params)
-    chatroom = message.chatroom
-    broadcast chatroom
+    message = Message.new(message_params)
+    if message.save
+      chatroom = message.chatroom
+      broadcast chatroom
+    end
     render json: message, status: :ok
   end
 
@@ -41,20 +42,21 @@ class MessagesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      message = Message.find(params[:id])
-    end
+    # def set_message
+    #   message = Message.find(params[:id])
+    # end
 
     # Only allow a list of trusted parameters through.
     def message_params
       params.permit(:user_id, :chatroom_id, :content)
     end
 
-    def broadcast(chatroom)
-      ActionCable.server.broadcast(chatroom, {
+    def broadcast chatroom 
+      ChatroomsChannel.broadcast_to(chatroom, {
         chatroom: chatroom,
         users: chatroom.users,
         messages: chatroom.messages,
       })
     end
 end
+

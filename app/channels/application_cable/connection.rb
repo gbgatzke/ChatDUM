@@ -1,7 +1,7 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
-    # rescue_from StandardError, with: :report_error
+    
 
     def connect
       self.current_user = find_verified_user
@@ -9,15 +9,15 @@ module ApplicationCable
 
     private
       def find_verified_user
-        if verified_user = User.find_by(id: cookies.encrypted["_session_id"]["user_id"])
+        if verified_user = User.find(cookies.encrypted["_session_id"]["user_id"])
           verified_user
+          puts "am I verified"
+          
         else
           reject_unauthorized_connection
         end
       end
 
-      # def report_error(e)
-      #   SomeExternalBugtrackingService.notify(e)
-      # end
+      
   end
 end

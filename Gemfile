@@ -33,6 +33,10 @@ gem "bootsnap", require: false
 #faker gem
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
+gem 'fast_jsonapi'
+
+gem 'byebug', '~> 11.1', '>= 11.1.3'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
