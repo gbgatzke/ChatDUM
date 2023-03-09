@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => "/cable"
   resources :bios, only: [:show]
   resources :messages, only: [:show, :create, :destroy, :update]
-  resources :chatrooms, only: [:index, :show]
+  resources :chatrooms
   resources :users
 
   get '/userprofile/:id', to: 'users#profile'

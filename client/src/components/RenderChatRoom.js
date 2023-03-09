@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
-
 import RenderMessageCard from "./RenderMessageCard"
+import RoomWebSocket from "./RoomWebSocket"
 
 
-function RenderChatRoom({ currentUser }){
+function RenderChatRoom({ currentUser, cableApp }){
 
-    const [messages, setMessages] = useState([])
+    const [ currentRoom, setCurrentRoom ] = useState({
+        chatroom: {},
+        messages: []
+    })
+    const [ messages, setMessages ] = useState([])
 
     const { id } = useParams()
+
+    function updateApp(updatedRoom) {
+        console.log(updatedRoom)
+    }
 
     useEffect(() => {
         fetch(`/chatroom/${id}/messages`)
         .then(r => r.json())
-        .then(r => 
+        .then(r =>
             setMessages(r)
             )
         },[])
-
-    
 
     ////////////////////////////////
     // creating message render card
@@ -34,7 +40,6 @@ function RenderChatRoom({ currentUser }){
         fetch(`/messages/${id}`, {
             method: 'DELETE'
         })
-        
         const filteredMessages = messages.filter((mess) => {
             return mess.id !== id
         })
@@ -63,6 +68,12 @@ function RenderChatRoom({ currentUser }){
         e.target.reset()
     }
 
+    function getRoomData(id) {
+        fetch(`/chatrooms/${id}`)
+        .then(r => r.json())
+        .then(r => setCurrentRoom(r))
+    }
+
 
     /////////////////////////////////
     //// render page ////////////////
@@ -77,13 +88,19 @@ function RenderChatRoom({ currentUser }){
         
     return(
         <>
-        <h1>{messages[0].chatroom.room_name}</h1>
+        
+        {/* <h1>{messages[0].chatroom.room_name}</h1> */}
         {messageList}
         <form onSubmit={handleSubmit} >
             <label>Enter Message</label>
             <input type="text" name="newMessage" id="newMessage" />
             <button>SEND</button>
         </form>
+        <RoomWebSocket 
+            cableApp={cableApp} 
+            updateApp={updateApp}
+            getRoomData={getRoomData}
+        />
         </>
     )}
 }

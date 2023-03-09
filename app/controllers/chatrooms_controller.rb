@@ -9,7 +9,8 @@ class ChatroomsController < ApplicationController
 
   # GET /chatrooms/1
   def show
-    render json: chatroom
+    chatroom = Chatroom.find(params[:id])
+    render json: chatroom, status: :ok
   end
 
   # POST /chatrooms
@@ -46,7 +47,7 @@ class ChatroomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chatroom
-      chatroom = Chatroom.find(params[:id])
+      @chatroom = Chatroom.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
