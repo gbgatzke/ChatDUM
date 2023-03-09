@@ -15,9 +15,10 @@ import EditUserProfile from './components/EditUserProfile';
 
 
 
-function App() {
+function App({ cableApp }) {
 
   const [ currentUser, setCurrentUser ] = useState(null)
+  
   const navigate = useNavigate()
  
   useEffect(() => {
@@ -43,11 +44,10 @@ function App() {
         <Route path="/home" element={<Home currentUser={currentUser}/>}/>
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
-        <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser}/>}/>
+        <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser} cableApp={cableApp}/>}/>
         <Route path="/profile/:id" element={<UserProfile />}/>
         <Route path="/editprofile/:id" element={<EditUserProfile />}/>
       </Routes>
-    
     </>
 
   )

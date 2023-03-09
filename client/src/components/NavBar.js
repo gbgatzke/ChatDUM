@@ -1,6 +1,6 @@
  import{ NavLink } from 'react-router-dom'
 
-function NavBar({handleLogout, currentUser }) {
+function NavBar({ handleLogout, currentUser }) {
 
     if(!currentUser) {return (
         <div>

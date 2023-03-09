@@ -14,30 +14,29 @@ class MessagesController < ApplicationController
 
   # POST /messages
   def create
-    message = Message.new(message_params)
-
-    if message.save
-      render json: message, status: :created, location: message
-    else
-      render json: message.errors, status: :unprocessable_entity
-    end
+    message = Message.create(message_params)
+    chatroom = message.chatroom
+    broadcast chatroom
+    render json: message, status: :ok
   end
 
   # PATCH/PUT /messages/1
   def update
     message = Message.find(params[:id])
-    if message.update(message_params)
-      render json: message
-    else
-      render json: message.errors, status: :unprocessable_entity
-    end
+    message.update(message_params)
+    chatroom = message.chatroom
+    broadcast chatroom
+    render json: message
   end
 
   # DELETE /messages/1
   def destroy
     message = Message.find(params[:id])
-    message.destroy
-    
+    if message.destroy
+      chatroom = message.chatroom
+      broadcast chatroom
+    end
+    head :no_content
   end
 
   private
@@ -49,5 +48,13 @@ class MessagesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def message_params
       params.permit(:user_id, :chatroom_id, :content)
+    end
+
+    def broadcast(chatroom)
+      ActionCable.server.broadcast(chatroom, {
+        chatroom: chatroom,
+        users: chatroom.users,
+        messages: chatroom.messages,
+      })
     end
 end
