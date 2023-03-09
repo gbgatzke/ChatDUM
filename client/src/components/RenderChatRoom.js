@@ -15,14 +15,17 @@ function RenderChatRoom({ currentUser, cableApp }){
     const { id } = useParams()
 
     function updateApp(updatedRoom) {
-        console.log(updatedRoom.messages)
+        const incomingMessages = updatedRoom
+        setMessages([...messages, incomingMessages])
     }
 
     useEffect(() => {
+        
         fetch(`/chatroom/${id}/messages`)
         .then(r => r.json())
-        .then(r =>
-            setMessages(r)
+        .then(data =>
+            // console.log(data)
+            setMessages(data)
             )
         },[])
 
@@ -51,10 +54,10 @@ function RenderChatRoom({ currentUser, cableApp }){
         const messageNew = {
             content: e.target.newMessage.value,
             user_id: currentUser.id,
-            chatroom_id: id
+            chatroom_id: parseInt(id)
         }
-        console.log(messageNew)
-        fetch(`/messages`, {
+        
+        fetch('/messages', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(messageNew)
@@ -63,7 +66,7 @@ function RenderChatRoom({ currentUser, cableApp }){
             if (r.ok) {
                 r.json().then((mess) => {
                     setMessages([...messages, mess])
-                    console.log(mess)
+                    
                 })
             }
             })
@@ -74,7 +77,7 @@ function RenderChatRoom({ currentUser, cableApp }){
     function getRoomData(id) {
         fetch(`/chatrooms/${id}`)
         .then(r => r.json())
-        .then(r => console.log(r))
+        .then(r => setCurrentRoom(r))
     }
 
 
@@ -82,7 +85,7 @@ function RenderChatRoom({ currentUser, cableApp }){
     //// render page ////////////////
     /////////////////////////////////
 
-    if(messages === []){
+    if(!messages){
         return(
             <h1>Loading!!!</h1>
             )
@@ -102,6 +105,8 @@ function RenderChatRoom({ currentUser, cableApp }){
             cableApp={cableApp} 
             updateApp={updateApp}
             getRoomData={getRoomData}
+            messages={messages}
+            setMessages={setMessages}
         />
         </>
     )}

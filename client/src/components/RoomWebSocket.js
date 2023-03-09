@@ -13,13 +13,13 @@ function RoomWebSocket(props) {
                 room: window.location.href.match(/\d+$/)[0]
             },
             {
-                received: (updatedRoom) => {
-                    console.log(updatedRoom)
-                    props.updateApp(updatedRoom)
+                received: (message) => {
+                    console.log(message)
+                    props.updateApp(message)
                 },
             }
         )
-        console.log(props.cableApp.room)
+        // console.log(props.cableApp.room)
         },[])
         
     return <div></div>

@@ -1,23 +1,24 @@
 class MessagesController < ApplicationController
-
+  wrap_parameters format: []
   # GET /messages
   def index
     messages = Message.all
     render json: messages
   end
 
-  # GET /messages/1
-  # def show
-  #   render json: message
-  # end
+  #GET /messages/1
+  def show
+    render json: message
+  end
 
   # POST /messages
   def create
-    message = Message.new(message_params)
-    if message.save
-      chatroom = message.chatroom
-      broadcast chatroom
-    end
+    message = Message.create!(message_params)
+    chatroom = message.chatroom
+    puts message
+    puts chatroom
+    ChatroomsChannel.broadcast_to(chatroom, message)
+    # broadcast chatroom
     render json: message, status: :ok
   end
 
@@ -35,7 +36,7 @@ class MessagesController < ApplicationController
     message = Message.find(params[:id])
     if message.destroy
       chatroom = message.chatroom
-      broadcast chatroom
+      # broadcast chatroom
     end
     head :no_content
   end

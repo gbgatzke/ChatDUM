@@ -93,8 +93,6 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     erubi (1.12.0)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -103,6 +101,8 @@ GEM
     irb (1.6.2)
       reline (>= 0.3.0)
     jsonapi-renderer (0.2.2)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -189,7 +189,7 @@ DEPENDENCIES
   byebug (~> 11.1, >= 11.1.3)
   debug
   faker!
-  fast_jsonapi
+  jsonapi-serializer
   pg (~> 1.1)
   puma (~> 5.0)
   rack-cors

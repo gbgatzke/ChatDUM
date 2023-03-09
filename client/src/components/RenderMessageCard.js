@@ -33,10 +33,10 @@ function RenderMessageCard({message, currentUser, handleDelete, handleEditMessag
     return(
         <div className="message-card">
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" />
-            <h6>{message.user.username} ... {message.created_at}</h6>
+            {/* <h6>{message.user.username} ... {message.created_at}</h6> */}
             {editOn ? <form onSubmit={handleEditMessage}><input type="text" defaultValue={content} style={{width: "520px"}} name="editForm" /><button>Save</button></form> : <p>{content}</p>}
-            {currentUser.id === message.user.id ? <button onClick={() => handleDelete(message.id) } >Delete</button> : null }
-            {currentUser.id === message.user.id ? <button onClick={() => setEditOn(!editOn)}>edit</button> : null}
+            {/* {currentUser.id === message.user.id ? <button onClick={() => handleDelete(message.id) } >Delete</button> : null }
+            {currentUser.id === message.user.id ? <button onClick={() => setEditOn(!editOn)}>edit</button> : null} */}
         </div>
     )}
 }
