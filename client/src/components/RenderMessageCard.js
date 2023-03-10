@@ -10,7 +10,7 @@ function RenderMessageCard({message, currentUser, handleDelete, handleEditMessag
         const editMessage = {
                 content: e.target.editForm.value
         }
-        console.log(editMessage)
+        
         fetch(`/messages/${message.id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
