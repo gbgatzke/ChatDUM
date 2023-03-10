@@ -14,7 +14,7 @@ skip_before_action :authorize, only: :create
   def update
     user = User.find(params[:id])
     user.update(user_params)
-    render json: user, status: :ok
+    render json: user, serializer: UsersWithChatroomsSerializer
   end
 
   def profile

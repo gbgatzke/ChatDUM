@@ -32,6 +32,7 @@ function Login({setCurrentUser}) {
                 r.json().then((user) => {
                     setCurrentUser(user)
                     navigate('/home')
+                    navigate('/home')
                 })
             }else{
                 r.json().then((error) => setError(error.errors))

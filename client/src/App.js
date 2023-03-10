@@ -16,12 +16,10 @@ import EditUserProfile from './components/EditUserProfile';
 
 
 function App({ cableApp }) {
-  
   const [ currentUser, setCurrentUser ] = useState(null)
-  
-  
+
   const navigate = useNavigate()
- 
+
   useEffect(() => {
     fetch('/me')
     .then(r => {
@@ -38,22 +36,24 @@ function App({ cableApp }) {
       setCurrentUser(null)
     }
 
-    
+    const handleEditProfile = (editedProf) => {
+      setCurrentUser(editedProf)
+    }
 
   return (
     <>
-      
+
       <NavBar handleLogout={handleLogout} currentUser={currentUser} />
-      
+
       <Routes>
         <Route path="/home" element={<Home currentUser={currentUser}/>}/>
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
         <Route path='/login' element={<Login setCurrentUser={setCurrentUser}/>}/>
         <Route path='/chatroom/:id' element={<RenderChatRoom currentUser={currentUser} cableApp={cableApp}/>}/>
         <Route path="/profile/:id" element={<UserProfile />}/>
-        <Route path="/editprofile/:id" element={<EditUserProfile />}/>
+        <Route path="/editprofile/:id" element={<EditUserProfile handleEditProfile={handleEditProfile}/>}/>
       </Routes>
-      
+
     </>
 
   )

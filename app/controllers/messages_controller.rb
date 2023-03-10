@@ -14,8 +14,8 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     message = Message.create!(message_params)
-    chatroom = message.chatroom
-    message.broadcast_message
+    # chatroom = message.chatroom
+    # message.broadcast_message
     # ChatroomsChannel.broadcast_to(chatroom, {
     #   messages: message,
     #   chatroom: chatroom,
@@ -29,8 +29,8 @@ class MessagesController < ApplicationController
   def update
     message = Message.find(params[:id])
     message.update(message_params)
-    chatroom = message.chatroom
-    broadcast chatroom
+    # chatroom = message.chatroom
+    # broadcast chatroom
     render json: message
   end
 
@@ -45,22 +45,17 @@ class MessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_message
-    #   message = Message.find(params[:id])
-    # end
 
-    # Only allow a list of trusted parameters through.
     def message_params
       params.permit(:user_id, :chatroom_id, :content)
     end
 
-    def broadcast chatroom 
-      ChatroomsChannel.broadcast_to(chatroom, {
-        chatroom: chatroom,
-        users: chatroom.users,
-        messages: chatroom.messages,
-      })
-    end
+    # def broadcast chatroom 
+    #   ChatroomsChannel.broadcast_to(chatroom, {
+    #     chatroom: chatroom,
+    #     users: chatroom.users,
+    #     messages: chatroom.messages,
+    #   })
+    # end
 end
 
