@@ -16,10 +16,7 @@
       .then(data => setUsers(data))
   },[])
 
-  const dropdownUsers = users.map(user => {
-      return <UserDropDownList key={user.id} user={user}/>
-  }
-)
+  
     const handleClick = () => {
       navigate(`/editprofile/${currentUser.id}`)
     }
@@ -56,6 +53,11 @@
     if(!currentUser){
       return(<h3>Please log in to see your messages!</h3>)
     }
+    
+    const dropdownUsers = users.map(user => {
+      return <UserDropDownList key={user.id} user={user}/>
+    })
+    
     return (
         <div>
           

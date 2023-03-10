@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 function NewUserForm({ setCurrentUser }) {
 
     const navigate = useNavigate()
+    const [errors, setErrors] = useState([])
 
     const initValues = {
         username: '',
@@ -17,9 +18,9 @@ function NewUserForm({ setCurrentUser }) {
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({...formData, [name]: value})
-      }
+    }
 
-      const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         fetch("/signup", {
             method: 'POST',
@@ -34,12 +35,16 @@ function NewUserForm({ setCurrentUser }) {
                 })
             } else {
                 r.json().then(err => {
-                    console.log(err)
+                    setErrors(err.errors)
                 })
             }
         })
       }
 
+      const errorHandling = errors.map((error, index) => {
+        return (<div><h5 style={{color: "red"}} key={index}>{error}!<br></br></h5></div>)
+      })
+      
 
     return (
         <div className="form">
@@ -87,6 +92,7 @@ function NewUserForm({ setCurrentUser }) {
                 </div>
                 <button className="review_button" type="submit">Submit</button>
             </form>
+            {errors ? errorHandling : null}
             </div>
     )
 }
