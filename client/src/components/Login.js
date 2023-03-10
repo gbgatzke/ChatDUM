@@ -12,6 +12,7 @@ function Login({setCurrentUser}) {
     }
 
     const [ formData, setFormData ] = useState(initValues)
+    const [error, setError] = useState(null)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -30,10 +31,13 @@ function Login({setCurrentUser}) {
             if(r.ok){
                 r.json().then((user) => {
                     setCurrentUser(user)
+                    navigate('/home')
                 })
+            }else{
+                r.json().then((error) => setError(error.errors))
             }
         })
-        navigate('/home')
+        
     }
 
     return (
@@ -61,6 +65,7 @@ function Login({setCurrentUser}) {
                 </div>
                 <button>CLICK</button>
             </form>
+            {error ? <h5 style={{color: "red"}}>{error}</h5> : null}
             
         </div>
         
