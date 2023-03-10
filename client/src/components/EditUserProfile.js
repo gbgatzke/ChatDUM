@@ -3,22 +3,35 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 function EditUserProfile() {
 
-    const [ formData, setFormData ] = useState([])
+    const [ formData, setFormData ] = useState({
+        username: '',
+        name: '',
+        password: '',
+        password_confirmation: '',
+    })
+
     const { id } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`/users/${id}`)
         .then(r => r.json())
-        .then(data => setFormData(data))
+        .then(data => console.log(data))
 
     })
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        e.preventDefault()
+        const { name, value } = e.target
+        setFormData({...formData, [name]: value})
     }
 
     const handleSubmit = () => {
+        fetch(`/users/${id}`,{
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
 
     }
     return (
@@ -63,6 +76,26 @@ function EditUserProfile() {
                         value={formData.password_confirmation}
                         onChange={handleChange}
                         placeholder="Password Confirmation"
+                    />
+                </div>
+                <div className="form_input">
+                    <input
+                        type="text"
+                        id="bio_content"
+                        name="bio_content"
+                        value=''
+                        onChange={handleChange}
+                        placeholder="Enter Bio"
+                    />
+                </div>
+                <div className="form_input">
+                    <input
+                        type="text"
+                        id="image"
+                        name="image"
+                        value=''
+                        onChange={handleChange}
+                        placeholder="New Image"
                     />
                 </div>
                 <button>Submit Changes</button>
