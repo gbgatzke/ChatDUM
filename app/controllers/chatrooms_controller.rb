@@ -43,6 +43,14 @@ class ChatroomsController < ApplicationController
     render json: messages, status: :ok
   end
 
+  def new_chatroom
+    chatroom = Chatroom.create(room_name: params[:room_name])
+    user1 = Message.create(content: "LETS CHAT!", user_id: params[:send_id], chatroom_id: chatroom.id)
+    user2 = Message.create(content: "fine.", user_id: params[:receive_id], chatroom_id: chatroom.id)
+  
+    render json: chatroom, status: :created
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chatroom

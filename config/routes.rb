@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
   delete "/logout", to: "sessions#destroy"
   post '/login', to: "sessions#create"
+  post '/chatroom/new', to: "chatrooms#new_chatroom"
   
 
   get '*path',

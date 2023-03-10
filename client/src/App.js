@@ -16,8 +16,9 @@ import EditUserProfile from './components/EditUserProfile';
 
 
 function App({ cableApp }) {
-
+  
   const [ currentUser, setCurrentUser ] = useState(null)
+  
   
   const navigate = useNavigate()
  
@@ -37,9 +38,13 @@ function App({ cableApp }) {
       setCurrentUser(null)
     }
 
+    
+
   return (
     <>
-      <NavBar handleLogout={handleLogout} currentUser={currentUser}/>
+      
+      <NavBar handleLogout={handleLogout} currentUser={currentUser} />
+      
       <Routes>
         <Route path="/home" element={<Home currentUser={currentUser}/>}/>
         <Route path="/userform" element={<NewUserForm setCurrentUser={setCurrentUser}/>}/>
@@ -48,6 +53,7 @@ function App({ cableApp }) {
         <Route path="/profile/:id" element={<UserProfile />}/>
         <Route path="/editprofile/:id" element={<EditUserProfile />}/>
       </Routes>
+      
     </>
 
   )

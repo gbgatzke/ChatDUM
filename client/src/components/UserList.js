@@ -6,9 +6,9 @@ function UserList() {
     const [ users, setUsers ] = useState([])
 
     useEffect(() =>{
-      fetch("/users")
-      .then(r => r.json())
-      .then(data => setUsers(data))
+        fetch("/users")
+        .then(r => r.json())
+        .then(data => setUsers(data))
     },[])
 
     const displayUsers = users.map(user =>
