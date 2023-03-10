@@ -7,8 +7,13 @@ function ChatroomCard({ room }) {
     const handleClick = () => {
         navigate(`/chatroom/${room.id}`)
     }
+
+    
     return (
-        <h1 onClick={handleClick}>{room.room_name}</h1>
+        <div className="chatroomCard">
+            <h3 onClick={handleClick}>{room.room_name}</h3>
+            <p></p>
+        </div>
     )
 }
 

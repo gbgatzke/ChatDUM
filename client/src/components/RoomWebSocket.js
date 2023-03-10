@@ -14,13 +14,13 @@ function RoomWebSocket(props) {
             },
             {
                 received: (message) => {
-                    console.log(message)
+                    
                     props.updateApp(message)
                 },
             }
         )
-        console.log(props.cableApp.room)
-        },[props.messages])
+        
+        },[])
         
     return <div></div>
 }

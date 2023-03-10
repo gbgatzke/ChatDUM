@@ -22,7 +22,7 @@ function RenderChatRoom({ currentUser, cableApp }){
             user: updatedRoom.user,
             chatroom: updatedRoom.chatroom,
         }
-        console.log(incomingMessages)
+        console.log(incomingMessages.content)
         setMessages([...messages, incomingMessages])
     }
 
@@ -72,8 +72,8 @@ function RenderChatRoom({ currentUser, cableApp }){
         .then(r => {
             if (r.ok) {
                 r.json().then((mess) => {
-                    // setMessages([...messages, mess])
-                    console.log('return')
+                    setMessages([...messages, mess])
+                    // console.log('return')
                 })
             }
             })
@@ -87,12 +87,12 @@ function RenderChatRoom({ currentUser, cableApp }){
         .then(r => setCurrentRoom(r))
     }
 
-
+   
     /////////////////////////////////
     //// render page ////////////////
     /////////////////////////////////
 
-    if(!messages){
+    if(messages === []){
         return(
             <h1>Loading!!!</h1>
             )

@@ -20,3 +20,4 @@ class ChatroomsChannel < ApplicationCable::Channel
 
 
 end
+

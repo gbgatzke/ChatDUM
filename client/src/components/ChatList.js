@@ -9,7 +9,10 @@ function ChatList({ currentUser }) {
         )
 
     return (
-        <div>{rooms}</div>
+        <div className='chatroomContainer'>
+            <h2>Chatrooms</h2>
+            {rooms}
+        </div>
     )
 }
 

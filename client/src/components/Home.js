@@ -8,6 +8,7 @@
 
     const navigate = useNavigate()
     const [ users, setUsers ] = useState([])
+    
 
     useEffect(() =>{
       fetch("/users")
@@ -16,9 +17,7 @@
   },[])
 
   const dropdownUsers = users.map(user => {
-    
       return <UserDropDownList key={user.id} user={user}/>
-    
   }
 )
     const handleClick = () => {
@@ -31,7 +30,7 @@
     ////////////////////////////
 
     function handleNewChat(e){
-      e.preventDefault()
+      // e.preventDefault()
       const formBody = {
         send_id: currentUser.id,
         receive_id: parseInt(e.target.drop.value),
@@ -46,7 +45,7 @@
       .then((r) => {
         if(r.ok){
           r.json().then((data) => {
-
+            
           })
         }
       })

@@ -15,12 +15,12 @@ class MessagesController < ApplicationController
   def create
     message = Message.create!(message_params)
     chatroom = message.chatroom
-    
-    ChatroomsChannel.broadcast_to(chatroom, {
-      messages: message,
-      chatroom: chatroom,
-      user: message.user,
-    })
+    message.broadcast_message
+    # ChatroomsChannel.broadcast_to(chatroom, {
+    #   messages: message,
+    #   chatroom: chatroom,
+    #   user: message.user,
+    # })
     # broadcast chatroom
     render json: message, status: :ok
   end

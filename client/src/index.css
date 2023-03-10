@@ -30,3 +30,24 @@ code {
 .message-card img{
   width: 25px;
 }
+
+div .chatroomCard{
+  border: blue 5px solid;
+  border-radius: 100px;
+  text-align: center;
+  width: 400px;
+  margin: 25px auto;
+  background-color: rgba(0, 0, 255, 0.5);
+  color: white;
+}
+
+div .chatroomContainer {
+  text-align: center;
+}
+
+div #createChatroomForm {
+  border: 4px rgb(184, 25, 25) solid;
+  padding: 25px;
+  width: 650px;
+  margin: auto;
+}
