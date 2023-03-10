@@ -15,7 +15,14 @@ function RenderChatRoom({ currentUser, cableApp }){
     const { id } = useParams()
 
     function updateApp(updatedRoom) {
-        const incomingMessages = updatedRoom
+        const incomingMessages = {
+            content: updatedRoom.messages.content,
+            created_at: updatedRoom.messages.created_at,
+            id: updatedRoom.messages.id,
+            user: updatedRoom.user,
+            chatroom: updatedRoom.chatroom,
+        }
+        console.log(incomingMessages)
         setMessages([...messages, incomingMessages])
     }
 
@@ -34,8 +41,8 @@ function RenderChatRoom({ currentUser, cableApp }){
     ////////////////////////////////
 
 
-    const messageList = messages.map((message) => {
-        return <RenderMessageCard message={message} key={message.id} currentUser={currentUser} handleDelete={handleDelete} />
+    const messageList = messages.map((message, index) => {
+        return <RenderMessageCard message={message} key={index} currentUser={currentUser} handleDelete={handleDelete} />
     })
 
     function handleDelete(id){
@@ -65,8 +72,8 @@ function RenderChatRoom({ currentUser, cableApp }){
         .then(r => {
             if (r.ok) {
                 r.json().then((mess) => {
-                    setMessages([...messages, mess])
-                    
+                    // setMessages([...messages, mess])
+                    console.log('return')
                 })
             }
             })

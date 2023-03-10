@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 function RoomWebSocket(props) {
 
     useEffect(() => {
-        props.getRoomData(window.location.href.match(/\d+$/)[0])
+        // props.getRoomData(window.location.href.match(/\d+$/)[0])
 
 
 
@@ -19,8 +19,8 @@ function RoomWebSocket(props) {
                 },
             }
         )
-        // console.log(props.cableApp.room)
-        },[])
+        console.log(props.cableApp.room)
+        },[props.messages])
         
     return <div></div>
 }

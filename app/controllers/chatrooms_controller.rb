@@ -40,7 +40,6 @@ class ChatroomsController < ApplicationController
   def show_messages
     chatroom = Chatroom.find(params[:id])
     messages = chatroom.messages
-    puts "hiiiiiii"
     render json: messages, status: :ok
   end
 
