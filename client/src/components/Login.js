@@ -30,10 +30,11 @@ function Login({setCurrentUser}) {
             if(r.ok){
                 r.json().then((user) => {
                     setCurrentUser(user)
+                    navigate('/home')
                 })
             }
         })
-        navigate('/home')
+
     }
 
     return (

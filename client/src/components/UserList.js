@@ -1,7 +1,7 @@
 import UserListItem from "./UserListItem"
 import { useState, useEffect } from 'react'
 
-function UserList() {
+function UserList({ currentUser }) {
 
     const [ users, setUsers ] = useState([])
 
@@ -11,9 +11,14 @@ function UserList() {
         .then(data => setUsers(data))
     },[])
 
-    const displayUsers = users.map(user =>
-        <UserListItem key={user.id} user={user}/>
+    const filterUsers = users.filter(user => {
+        return user.id !== currentUser.id
+    }
     )
+
+    const displayUsers = filterUsers.map(user =>
+        <UserListItem key={user.id} user={user}/>
+        )
 
     return (
         <div>

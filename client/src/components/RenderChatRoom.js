@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import RenderMessageCard from "./RenderMessageCard"
-import RoomWebSocket from "./RoomWebSocket"
+// import RoomWebSocket from "./RoomWebSocket"
 
 
 function RenderChatRoom({ currentUser, cableApp }){
@@ -108,13 +108,13 @@ function RenderChatRoom({ currentUser, cableApp }){
             <input type="text" name="newMessage" id="newMessage" />
             <button>SEND</button>
         </form>
-        <RoomWebSocket 
+        {/* <RoomWebSocket 
             cableApp={cableApp} 
             updateApp={updateApp}
             getRoomData={getRoomData}
             messages={messages}
             setMessages={setMessages}
-        />
+        /> */}
         </>
     )}
 }
