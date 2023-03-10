@@ -51,3 +51,10 @@ div #createChatroomForm {
   width: 650px;
   margin: auto;
 }
+
+div .message-card{
+  width: 400px;
+  border-radius: 25px;
+  color: white;
+  margin: 10px auto;
+}

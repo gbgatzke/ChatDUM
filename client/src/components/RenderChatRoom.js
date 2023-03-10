@@ -41,9 +41,7 @@ function RenderChatRoom({ currentUser, cableApp }){
     ////////////////////////////////
 
 
-    const messageList = messages.map((message, index) => {
-        return <RenderMessageCard message={message} key={index} currentUser={currentUser} handleDelete={handleDelete} />
-    })
+    
 
     function handleDelete(id){
 
@@ -95,13 +93,15 @@ function RenderChatRoom({ currentUser, cableApp }){
     if(messages === []){
         return(
             <h1>Loading!!!</h1>
-            )
-    }else{
+            )}
+
+    const messageList = messages.map((message, index) => {
+        return <RenderMessageCard message={message} key={index} currentUser={currentUser} handleDelete={handleDelete} />
+    })
         
     return(
         <>
         
-        {/* <h1>{messages[0].chatroom.room_name}</h1> */}
         {messageList}
         <form onSubmit={handleSubmit} >
             <label>Enter Message</label>
@@ -117,6 +117,6 @@ function RenderChatRoom({ currentUser, cableApp }){
         />
         </>
     )}
-}
+
 
 export default RenderChatRoom

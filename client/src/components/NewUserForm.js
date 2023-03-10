@@ -39,12 +39,12 @@ function NewUserForm({ setCurrentUser }) {
                 })
             }
         })
-      }
+    }
 
-      const errorHandling = errors.map((error, index) => {
+    const errorHandling = errors.map((error, index) => {
         return (<div><h5 style={{color: "red"}} key={index}>{error}!<br></br></h5></div>)
-      })
-      
+    })
+    
 
     return (
         <div className="form">

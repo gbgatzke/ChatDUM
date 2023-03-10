@@ -25,13 +25,21 @@ function RenderMessageCard({message, currentUser, handleDelete, handleEditMessag
         setEditOn(!editOn)
     }
     
+    const colorBlue = {
+    backgroundColor: "blue"
+    }
+    const colorGreen= {
+        backgroundColor: "Green"
+        }
+
+
     if(!currentUser){
         return(<div className="message-card">
                 <h1>Loading</h1>
             </div>)
     }else{
     return(
-        <div className="message-card">
+        <div className="message-card" style={currentUser.id === message.user.id ? colorBlue : colorGreen}>
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" />
             <h6>{message.user.username} ... {message.created_at}</h6>
             {editOn ? <form onSubmit={handleEditMessage}><input type="text" defaultValue={content} style={{width: "520px"}} name="editForm" /><button>Save</button></form> : <p>{content}</p>}
